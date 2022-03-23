@@ -14,20 +14,17 @@ const dummyData = {
 function App() {
   const [data, setData] = useState(dummyData);
 
-  // useEffect(() => {
-  //   axios
-  //     .get(`https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY`)
-  //     .then((res) => {
-  //       console.log(res.data);
-  //     })
-  //     .catch((err) => console.error(err));
-  // }, []);
+  useEffect(() => {
+    axios
+      .get(`https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY`)
+      .then((response) => {
+        //console.log(response.data)
+        setData(response.data);
+      })
+      .catch((err) => console.error(err));
+  }, []);
 
-  return (
-    <div className="App">
-      <NasaPhoto photo={data} />
-    </div>
-  );
+  return <div className="App">{data && <NasaPhoto photo={data} />}</div>;
 }
 
 export default App;
