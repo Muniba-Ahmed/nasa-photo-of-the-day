@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import axios from "axios";
 import NasaPhoto from "./components/NasaPhoto";
+import styled from "styled-components";
 
 const dummyData = {
   date: "2022-03-23",
@@ -10,6 +11,19 @@ const dummyData = {
   hdurl: "https://apod.nasa.gov/apod/image/2203/Bubble_HubbleOzsarac_1952.jpg",
   title: "The Bubble Nebula from Hubble",
 };
+
+const StyledPhoto = styled.div`
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  padding: 10px;
+  border: 2px solid blue;
+
+  //grab some data!
+`;
 
 function App() {
   const [data, setData] = useState(dummyData);
@@ -24,7 +38,11 @@ function App() {
       .catch((err) => console.error(err));
   }, []);
 
-  return <div className="App">{data && <NasaPhoto photo={data} />}</div>;
+  return (
+    <StyledPhoto className="App">
+      {data && <NasaPhoto photo={data} />}
+    </StyledPhoto>
+  );
 }
 
 export default App;

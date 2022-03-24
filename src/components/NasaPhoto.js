@@ -1,14 +1,56 @@
 import React from "react";
+import styled, { keyframes } from "styled-components";
+
+const kf = keyframes`
+  50% {
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(360deg);
+  }`;
+
+const Wrapper = styled.div`
+  margin: 0 100px;
+  background-color: navy;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const StyledPhoto = styled.div`
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  padding: 10px;
+  border-bottom: 2px solid blue;
+  color: white;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    background-color: purple;
+  }
+
+  transform: scale(2); // start of the animation!
+  opacity: 0; // start of the animation!
+  animation: ${kf} 0.3s ease-in-out forwards;
+  //grab some data!
+`;
 
 const NasaPhoto = (props) => {
   return (
-    <div className="photoContainer">
-      <h1>Nasa Photo of the Day</h1>
-      <p>{props.photo.date}</p>
-      <img src={props.photo.hdurl} />
-      <h3>{props.photo.title}</h3>
-      <p>{props.photo.explanation}</p>
-    </div>
+    <Wrapper>
+      <StyledPhoto className="photoContainer">
+        <h1>Nasa Photo of the Day</h1>
+        <p>{props.photo.date}</p>
+        <img src={props.photo.hdurl} />
+        <h3>{props.photo.title}</h3>
+        <p>{props.photo.explanation}</p>
+      </StyledPhoto>
+    </Wrapper>
   );
 };
 
